@@ -1,6 +1,6 @@
 class Solver
-	def self.solve(graph, source)
-		@size = graph.length
+	def self.solve(graph_hash, source)
+		@size = graph_hash.length
 		@visited_vertices = Array.new(@size, false)
 		distances = Array.new(@size, Float::INFINITY)
 		distances[source] = 0
@@ -8,9 +8,9 @@ class Solver
 			min = get_shortest_path(distances)
 			@visited_vertices[min] = true
 			@size.times do |j|
-				if @visited_vertices[j] == false &&
-						graph[min][j]+distances[min] < distances[j]
-					distances[j] = distances[min] + graph[min][j]
+				if @visited_vertices[j] == false && graph_hash[min][j] &&
+						graph_hash[min][j]+distances[min] < distances[j]
+					distances[j] = distances[min] + graph_hash[min][j]
 				end
 			end
 		end

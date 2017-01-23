@@ -12,15 +12,20 @@ class DijkstraTest < Minitest::Test
   SIZE = 15
   def test_algo
     NUMBER_OF_ITERATIONS.times do
+      hash = {}
       array = Array.new(SIZE){ |i|
+        hash[i] = {}
         Array.new(SIZE){ |j|
           if i == j
+            hash[i][j] = 0
             0
-            else
+          else
             if Random.rand(5)==0
               Float::INFINITY
             else
-              Random.rand(101)
+              r = Random.rand(101)
+              hash[i][j] = r
+              r
             end
           end
         }
