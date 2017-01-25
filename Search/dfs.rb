@@ -1,8 +1,8 @@
 module DFS
 	def self.solve(graph, from, to)
-		visited = Array.new(graph.length, false)
-		stack   = Array.new
-		size    = graph.length
+		visited       = Array.new(graph.length, false)
+		stack         = Array.new
+		size          = graph.length
 		visited[from] = true
 		stack.push(from)
 		flag = true
