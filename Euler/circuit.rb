@@ -1,12 +1,13 @@
-#Todo: write Graph class and add all methods to it
-
-#only for undirected
-class Circuit
-	def self.solve(graph)
-		size         = graph.length
+require_relative '../graph'
+class Graph
+	def euler_circuit
+		raise ArgumentError, 'Only undirected graph supported' if @directed
+		runnable
+		@run = true
+		size         = @graph.length
 		odd_vertices = Array.new
 		size.times do |i|
-			if graph[i].length % 2 == 1
+			if @graph[i].length % 2 == 1
 				odd_vertices.push(i)
 				if odd_vertices.length > 2
 					return nil
@@ -23,13 +24,12 @@ class Circuit
 		i = stack.last
 		j = 0
 		while !stack.empty?
-			while !graph[i][j] && j<size
+			while !@graph[i][j] && j<size
 				j = j + 1
 			end
 			if j < size
 				stack.push(j)
-				graph[i][j] = nil
-				graph[j][i] = nil
+				remove_edge(i,j)
 			else
 				result.push(stack.pop)
 			end
@@ -45,7 +45,7 @@ gr = {}
 	gr[i] = {}
 end
 gr[0][1] = 1; gr[0][2] = 1
-gr[1][0] = 1; gr[1][2] = 1
-gr[2][0] = 1; gr[2][1] = 1
+gr[1][2] = 1
 
-p Circuit.solve(gr)
+graph = Graph.new(gr, false)
+p graph.euler_circuit

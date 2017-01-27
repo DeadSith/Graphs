@@ -1,6 +1,8 @@
-module BFS
-	def self.get_solution(graph, from, to)
-		sol = self.solve(graph, from, to)
+require_relative '../graph'
+
+class Graph
+	def bfs(from, to)
+		sol = bfs_solve(@graph, from, to)
 		if sol
 			res     = Array.new
 			current = to
@@ -14,7 +16,7 @@ module BFS
 	end
 	
 	private
-	def self.solve(graph, from, to)
+	def bfs_solve(graph, from, to)
 		size          = graph.length
 		visited       = Array.new(size, false)
 		parent        = Array.new(size, -1)
@@ -50,5 +52,8 @@ gr[3][0]=1; gr[3][2]=1
 gr[4][1]=1; gr[4][2]=1; gr[4][6]=1
 gr[5][1]=1; gr[5][6]=1
 gr[6][4]=1; gr[6][5]=1
-p BFS.get_solution(gr, 0, 6)
+
+graph = Graph.new(gr)
+
+p graph.bfs(0, 6)
 # 7 5 2 1

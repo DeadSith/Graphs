@@ -1,14 +1,16 @@
-module DFS
-	def self.solve(graph, from, to)
-		visited       = Array.new(graph.length, false)
+require_relative '../graph'
+
+class Graph
+	def dfs(from, to)
+		visited       = Array.new(@graph.length, false)
 		stack         = Array.new
-		size          = graph.length
+		size          = @graph.length
 		visited[from] = true
 		stack.push(from)
 		flag = true
 		while (!stack.empty?) && flag
 			size.times do |i|
-				if graph[stack.last][i] && visited[i]==false
+				if @graph[stack.last][i] && visited[i]==false
 					stack.push(i)
 					visited[i] = true
 					flag       = false if i == to
@@ -33,4 +35,6 @@ gr[3][0]=1; gr[3][2]=1
 gr[4][1]=1; gr[4][2]=1; gr[4][6]=1
 gr[5][1]=1; gr[5][6]=1
 gr[6][4]=1; gr[6][5]=1
-p DFS.solve(gr, 0, 6)
+
+graph = Graph.new(gr)
+p graph.dfs(0, 6)

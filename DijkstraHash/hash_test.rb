@@ -3,12 +3,12 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 
 require_relative '../floyd_warshall'
-require_relative 'solver'
+require_relative 'dijkstra'
 
 MiniTest::Reporters.use!
 
 class DijkstraTest < Minitest::Test
-	NUMBER_OF_ITERATIONS = 100
+	NUMBER_OF_ITERATIONS = 1000
 	SIZE                 = 15
 	
 	def test_algo
@@ -32,8 +32,9 @@ class DijkstraTest < Minitest::Test
 				}
 			}
 			sol   = FloydWarshall.solve(array)
+			gr = Graph.new(hash, true)
 			SIZE.times do |i|
-				assert_equal(sol[i], Solver.solve(array, i))
+				assert_equal(sol[i], gr.dijkstra(i))
 			end
 		end
 	end
