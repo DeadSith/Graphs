@@ -23,7 +23,7 @@ class Graph
 		end
 		i = stack.last
 		j = 0
-		while !stack.empty?
+		until stack.empty?
 			while !@graph[i][j] && j<size
 				j = j + 1
 			end

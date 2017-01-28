@@ -2,6 +2,7 @@ require_relative '../graph'
 
 class Graph
 	def bfs(from, to)
+		runnable
 		sol = bfs_solve(@graph, from, to)
 		if sol
 			res     = Array.new
@@ -23,7 +24,7 @@ class Graph
 		queue         = Array.new
 		visited[from] = true
 		queue.push(from)
-		while !queue.empty?
+		until queue.empty?
 			current = queue.shift
 			if current == to
 				return parent
