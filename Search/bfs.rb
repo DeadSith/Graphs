@@ -2,8 +2,7 @@ require_relative '../graph'
 
 class Graph
 	def bfs(from, to)
-		runnable
-		sol = bfs_solve(@graph, from, to)
+		sol = bfs_solve(from, to)
 		if sol
 			res     = Array.new
 			current = to
@@ -16,8 +15,7 @@ class Graph
 		nil
 	end
 	
-	private
-	def bfs_solve(graph, from, to)
+	def bfs_solve(from, to, graph = @graph)
 		size          = graph.length
 		visited       = Array.new(size, false)
 		parent        = Array.new(size, -1)
@@ -41,7 +39,7 @@ class Graph
 	end
 end
 
-
+=begin
 gr = {}
 7.times do |i|
 	gr[i] = {}
@@ -56,5 +54,6 @@ gr[6][4]=1; gr[6][5]=1
 
 graph = Graph.new(gr)
 
-p graph.bfs(0, 6)
-# 7 5 2 1
+p graph.bfs_solve(0, 6)
+ 7 5 2 1
+=end

@@ -2,7 +2,6 @@ require_relative '../graph'
 
 class Graph
 	def dfs(from, to)
-		runnable
 		visited       = Array.new(@graph.length, false)
 		stack         = Array.new
 		size          = @graph.length

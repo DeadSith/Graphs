@@ -2,12 +2,19 @@ require_relative '../graph'
 class Graph
 	def euler_circuit
 		raise ArgumentError, 'Only undirected graph supported' if @directed
-		runnable
-		@run = true
 		size         = @graph.length
+		copy = {}
+		size.times do |i|
+			copy[i] = {}
+			size.times do |j|
+				if @graph[i][j]
+					copy[i][j] = graph[i][j]
+				end
+			end
+		end
 		odd_vertices = Array.new
 		size.times do |i|
-			if @graph[i].length % 2 == 1
+			if copy[i].length % 2 == 1
 				odd_vertices.push(i)
 				if odd_vertices.length > 2
 					return nil
@@ -24,12 +31,12 @@ class Graph
 		i = stack.last
 		j = 0
 		until stack.empty?
-			while !@graph[i][j] && j<size
+			while !copy[i][j] && j<size
 				j = j + 1
 			end
 			if j < size
 				stack.push(j)
-				remove_edge(i,j)
+				remove_edge(i,j,copy)
 			else
 				result.push(stack.pop)
 			end

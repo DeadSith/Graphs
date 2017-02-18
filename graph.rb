@@ -1,9 +1,8 @@
 class Graph
-	attr_reader :graph, :directed, :run
+	attr_reader :graph, :directed
 	
 	def initialize(graph = {},directed = false)
 		size = graph.size
-		@run = false
 		@graph = {}
 		@directed = directed
 		size.times do |i|
@@ -25,9 +24,9 @@ class Graph
 		self
 	end
 	
-	def remove_edge(i,j)
-		@graph[i].delete(j)
-		@graph[j].delete(i) unless directed
+	def remove_edge(i,j, graph = @graph)
+		graph[i].delete(j)
+		graph[j].delete(i) unless directed
 		self
 	end
 	
@@ -37,9 +36,5 @@ class Graph
 	
 	def [] (key)
 		@graph[key]
-	end
-	
-	def runnable
-		raise ArgumentError, 'Graph was changed after creation, create new one' if @run
 	end
 end
