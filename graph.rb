@@ -2,7 +2,7 @@ class Graph
 	attr_reader :graph, :directed
 	
 	def initialize(graph = {},directed = false)
-		size = graph.size
+		@size = graph.size
 		@graph = {}
 		@directed = directed
 		size.times do |i|
@@ -19,6 +19,10 @@ class Graph
 	end
 	
 	def add_edge (i, j, value)
+		@graph[i] = {} unless @graph[i]
+		@graph[j] = {} unless @graph[j]
+		@size = i+1 if i+1 > @size
+		@size = j+1 if j+1 > @size
 		@graph[i][j] = value
 		@graph[j][i] = value unless directed
 		self
@@ -31,7 +35,7 @@ class Graph
 	end
 	
 	def size
-		@graph.length
+		@size
 	end
 	
 	def [] (key)

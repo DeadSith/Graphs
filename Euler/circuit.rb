@@ -2,7 +2,7 @@ require_relative '../graph'
 class Graph
 	def euler_circuit
 		raise ArgumentError, 'Only undirected graph supported' if @directed
-		size         = @graph.length
+		size = @size
 		copy = {}
 		size.times do |i|
 			copy[i] = {}
@@ -36,7 +36,7 @@ class Graph
 			end
 			if j < size
 				stack.push(j)
-				remove_edge(i,j,copy)
+				remove_edge(i, j, copy)
 			else
 				result.push(stack.pop)
 			end
@@ -47,6 +47,7 @@ class Graph
 	end
 end
 
+=begin
 gr = {}
 3.times do |i|
 	gr[i] = {}
@@ -56,3 +57,4 @@ gr[1][2] = 1
 
 graph = Graph.new(gr, false)
 p graph.euler_circuit
+=end
